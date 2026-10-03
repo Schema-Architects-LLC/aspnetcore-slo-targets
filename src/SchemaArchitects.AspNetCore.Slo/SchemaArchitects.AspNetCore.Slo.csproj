@@ -11,9 +11,9 @@
     <RootNamespace>SchemaArchitects.AspNetCore.Slo</RootNamespace>
     <!-- Default for local builds; the release workflow overrides it from the git tag (v1.2.3 => 1.2.3) -->
     <Version>1.0.0</Version>
-    <Authors>SchemaArchitects</Authors>
-    <Company>SchemaArchitects</Company>
-    <Copyright>Copyright (c) 2026 SchemaArchitects</Copyright>
+    <Authors>Schema Architects LLC</Authors>
+    <Company>Schema Architects LLC</Company>
+    <Copyright>Copyright (c) 2026 Schema Architects LLC</Copyright>
     <Description>ASP.NET Core middleware that standardizes per-endpoint latency SLO targets via appsettings.json and reports them (APM ID, HTTP method, route template, target) to Dynatrace OneAgent with zero SDK dependencies.</Description>
     <PackageTags>aspnetcore;middleware;slo;sre;latency;dynatrace;observability;apm</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
