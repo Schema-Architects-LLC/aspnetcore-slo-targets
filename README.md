@@ -1,10 +1,32 @@
 # SchemaArchitects.AspNetCore.Slo
 
+[![CI](https://github.com/mariojacas/aspnetcore-slo-targets/actions/workflows/ci.yml/badge.svg)](https://github.com/mariojacas/aspnetcore-slo-targets/actions/workflows/ci.yml)
 [![Target Framework](https://img.shields.io/badge/.NET-8.0-512BD4.svg)](https://dotnet.microsoft.com/)
 [![Observability](https://img.shields.io/badge/Dynatrace-OneAgent%20IL%20Weaving-1496FF.svg)](https://www.dynatrace.com/)
-[![Feed](https://img.shields.io/badge/NuGet-Internal%20Artifacts-0078D4.svg)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ASP.NET Core middleware library designed to standardize latency-based Service Level Objectives (SLOs) across microservices. Captures target thresholds with zero external metrics overhead using **Dynatrace OneAgent IL (Intermediate Language) Weaving**.
+
+Teams install one package, declare per-endpoint latency targets in `appsettings.json`, and every request carries its APM ID, HTTP method, route template and target into Dynatrace, ready for centralized SLO dashboards.
+
+## Design Decisions
+
+**Zero-dependency telemetry through IL weaving.** Instead of shipping a metrics SDK, the middleware calls an intentionally empty, non-inlined method, `RecordSloTarget(apmId, method, route, targetMs)`. Dynatrace OneAgent instruments that method at runtime and captures its arguments as request attributes. Services take on no telemetry dependency and no exporter configuration; the method signature itself is the contract with the monitoring platform.
+
+**Cardinality protection by design.** Every value sent to the monitoring backend is bounded:
+- Routes are reported as **templates** (`/api/orders/{id}`), never raw URLs (`/api/orders/12345`).
+- Requests that don't match any endpoint (404s, vulnerability scanners) are **not recorded at all**, so random URLs can't create unbounded attribute values.
+- Health probes and configured paths are excluded **by segment** (`/swagger` covers `/swagger/index.html` but not `/swaggerish`).
+
+**One canonical route form.** Controllers report `api/Orders/{id:int}` while minimal APIs report `/api/orders/{id}`. Both are normalized (leading slash, constraints and optional/default markers stripped, case-insensitive matching), so configuration is written once and dashboards see one consistent value per endpoint.
+
+**Fail fast on bad configuration.** Options are validated at startup (`ValidateOnStart`): a missing `ApmId`, non-positive targets, invalid HTTP methods and duplicate targets (detected *after* normalization) stop the application with every error listed and its exact configuration path. A misconfigured service never runs while silently reporting wrong targets.
+
+**Detect misuse, don't just document it.** If `UseSloTargets()` is registered before `UseRouting()`, no endpoint is visible and nothing could be recorded. The middleware detects this at runtime (routing selected an endpoint *after* it ran) and logs a single actionable warning instead of failing silently.
+
+**Hot path stays cheap.** Target lookup is a dictionary keyed by method and normalized route, built once at startup; route normalization is cached per endpoint. Per-request cost is a few segment comparisons, two dictionary lookups and one empty method call.
+
+**Tested as it runs.** 47 tests run the real ASP.NET Core pipeline in memory (`TestServer`), covering minimal APIs and MVC controllers, method-specific and method-less targets, exclusions, 404s, pipeline ordering and configuration validation.
 
 ## Contents
 
