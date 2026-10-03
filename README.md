@@ -1,9 +1,9 @@
 # SchemaArchitects.AspNetCore.Slo
 
-[![CI](https://github.com/mariojacas/aspnetcore-slo-targets/actions/workflows/ci.yml/badge.svg)](https://github.com/mariojacas/aspnetcore-slo-targets/actions/workflows/ci.yml)
+[![CI](https://github.com/schema-architects/aspnetcore-slo-targets/actions/workflows/ci.yml/badge.svg)](https://github.com/schema-architects/aspnetcore-slo-targets/actions/workflows/ci.yml)
 [![Target Framework](https://img.shields.io/badge/.NET-8.0-512BD4.svg)](https://dotnet.microsoft.com/)
 [![Observability](https://img.shields.io/badge/Dynatrace-OneAgent%20IL%20Weaving-1496FF.svg)](https://www.dynatrace.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/mariojacas/aspnetcore-slo-targets/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/schema-architects/aspnetcore-slo-targets/blob/main/LICENSE)
 
 ASP.NET Core middleware library designed to standardize latency-based Service Level Objectives (SLOs) across microservices. Captures target thresholds with zero external metrics overhead using **Dynatrace OneAgent IL (Intermediate Language) Weaving**.
 
@@ -184,7 +184,7 @@ Enable `Debug` logging for the library to see each recorded target without Dynat
 SLO target recorded: [APM00000001] POST /catalogsvc/v1/shipProduct => 400 ms
 ```
 
-A runnable reference service lives in [`samples/SloMonitoring.SampleApi`](https://github.com/mariojacas/aspnetcore-slo-targets/tree/main/samples/SloMonitoring.SampleApi). Start it with `dotnet run --project samples/SloMonitoring.SampleApi` and send the requests in `SampleApi.http`.
+A runnable reference service lives in [`samples/SloMonitoring.SampleApi`](https://github.com/schema-architects/aspnetcore-slo-targets/tree/main/samples/SloMonitoring.SampleApi). Start it with `dotnet run --project samples/SloMonitoring.SampleApi` and send the requests in `SampleApi.http`.
 
 ---
 

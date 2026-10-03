@@ -18,8 +18,8 @@
     <PackageTags>aspnetcore;middleware;slo;sre;latency;dynatrace;observability;apm</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/mariojacas/aspnetcore-slo-targets</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/mariojacas/aspnetcore-slo-targets</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/schema-architects/aspnetcore-slo-targets</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/schema-architects/aspnetcore-slo-targets</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
 
     <!-- SourceLink (built into the .NET 8+ SDK): lets consumers step into this source from GitHub while debugging -->
