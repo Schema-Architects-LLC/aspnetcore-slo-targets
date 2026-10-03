@@ -5,16 +5,27 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <!-- NuGet and Corporate Governance Metadata -->
+    <!-- NuGet metadata (shown on nuget.org) -->
     <PackageId>SchemaArchitects.AspNetCore.Slo</PackageId>
     <AssemblyName>SchemaArchitects.AspNetCore.Slo</AssemblyName>
     <RootNamespace>SchemaArchitects.AspNetCore.Slo</RootNamespace>
+    <!-- Default for local builds; the release workflow overrides it from the git tag (v1.2.3 => 1.2.3) -->
     <Version>1.0.0</Version>
     <Authors>SchemaArchitects</Authors>
     <Company>SchemaArchitects</Company>
-    <Description>ASP.NET Core Middleware to standardize latency SLO targets for Dynatrace OneAgent monitoring.</Description>
-    <PackageTags>schemaarchitects;aspnetcore;slo;dynatrace;observability</PackageTags>
+    <Copyright>Copyright (c) 2026 SchemaArchitects</Copyright>
+    <Description>ASP.NET Core middleware that standardizes per-endpoint latency SLO targets via appsettings.json and reports them (APM ID, HTTP method, route template, target) to Dynatrace OneAgent with zero SDK dependencies.</Description>
+    <PackageTags>aspnetcore;middleware;slo;sre;latency;dynatrace;observability;apm</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/mariojacas/aspnetcore-slo-targets</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/mariojacas/aspnetcore-slo-targets</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <!-- SourceLink (built into the .NET 8+ SDK): lets consumers step into this source from GitHub while debugging -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
 
     <!-- Ship XML docs so consumers get IntelliSense; missing docs on public APIs become build warnings -->
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

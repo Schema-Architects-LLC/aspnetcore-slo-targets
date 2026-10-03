@@ -1,0 +1,49 @@
+name: Release
+
+# Publishes to nuget.org when a version tag is pushed:
+#   git tag v1.0.0
+#   git push origin v1.0.0
+# Requires the repository secret NUGET_API_KEY (Settings > Secrets and variables > Actions).
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Version from tag
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+
+      - name: Restore
+        run: dotnet restore SloMonitoring.sln
+
+      - name: Build
+        run: dotnet build SloMonitoring.sln --configuration Release --no-restore -p:Version=$VERSION
+
+      - name: Test
+        run: dotnet test SloMonitoring.sln --configuration Release --no-build
+
+      - name: Pack
+        run: dotnet pack src/SchemaArchitects.AspNetCore.Slo --configuration Release --no-build -p:Version=$VERSION --output artifacts
+
+      - name: Publish to nuget.org
+        # Pushing the .nupkg also pushes the matching .snupkg (symbols)
+        run: dotnet nuget push "artifacts/*.nupkg" --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+      - name: Upload packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-package-${{ env.VERSION }}
+          path: artifacts/*
