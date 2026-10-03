@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <!--
+    Microservices consume the published package instead:
+    <PackageReference Include="SchemaArchitects.AspNetCore.Slo" Version="1.0.0" />
+  -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SchemaArchitects.AspNetCore.Slo\SchemaArchitects.AspNetCore.Slo.csproj" />
+  </ItemGroup>
+
+</Project>

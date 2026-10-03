@@ -1,0 +1,40 @@
+@host = http://localhost:5080
+
+### POST target:[APM00000001] POST /catalogsvc/v1/updateProductStatus => 150 ms
+POST {{host}}/catalogsvc/v1/updateProductStatus
+Content-Type: application/json
+
+{ "productId": "PRD-001", "status": "Active" }
+
+### POST target: [APM00000001] POST /catalogsvc/v1/infoProduct => 300 ms
+POST {{host}}/catalogsvc/v1/infoProduct
+Content-Type: application/json
+
+{ "productId": "PRD-001" }
+
+### POST target: [APM00000001] POST /catalogsvc/v1/shipProduct => 400 ms
+POST {{host}}/catalogsvc/v1/shipProduct
+Content-Type: application/json
+
+{ "productId": "PRD-001", "quantity": 2 }
+
+### Same path, different method: GET /catalogsvc/v1/shipProduct => 300 ms (default, POST target not applied)
+GET {{host}}/catalogsvc/v1/shipProduct
+
+### GET-only target: GET /api/orders/{id} => 150 ms
+GET {{host}}/api/orders/ORD-99482
+
+### Method-less target (any method): GET /api/reports/monthly => 1200 ms
+GET {{host}}/api/reports/monthly
+
+### Not configured: falls back to DefaultLatencyMs => 300 ms
+GET {{host}}/api/customers/42
+
+### Excluded (default probe): nothing recorded
+GET {{host}}/healthz
+
+### Excluded (beneath "/internal"): nothing recorded
+GET {{host}}/internal/ping
+
+### Unmatched (404): nothing recorded
+GET {{host}}/wp-admin/setup.php

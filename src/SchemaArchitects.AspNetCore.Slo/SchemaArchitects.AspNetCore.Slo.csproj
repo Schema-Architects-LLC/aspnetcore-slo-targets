@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!-- NuGet and Corporate Governance Metadata -->
+    <PackageId>SchemaArchitects.AspNetCore.Slo</PackageId>
+    <AssemblyName>SchemaArchitects.AspNetCore.Slo</AssemblyName>
+    <RootNamespace>SchemaArchitects.AspNetCore.Slo</RootNamespace>
+    <Version>1.0.0</Version>
+    <Authors>SchemaArchitects</Authors>
+    <Company>SchemaArchitects</Company>
+    <Description>ASP.NET Core Middleware to standardize latency SLO targets for Dynatrace OneAgent monitoring.</Description>
+    <PackageTags>schemaarchitects;aspnetcore;slo;dynatrace;observability</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <!-- Ship XML docs so consumers get IntelliSense; missing docs on public APIs become build warnings -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- Publish debug symbols alongside the package (.snupkg) -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <!-- ASP.NET Core native framework reference -->
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <!-- Package README shown on the feed's package page -->
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Expose internal members exclusively to the test suite -->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>SchemaArchitects.AspNetCore.Slo.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>

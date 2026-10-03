@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Sample API (SLO)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-sample",
+      "program": "${workspaceFolder}/samples/SloMonitoring.SampleApi/bin/Debug/net8.0/SloMonitoring.SampleApi.dll",
+      "cwd": "${workspaceFolder}/samples/SloMonitoring.SampleApi",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://localhost:5080"
+      },
+      "console": "internalConsole",
+      "stopAtEntry": false
+    }
+  ]
+}
