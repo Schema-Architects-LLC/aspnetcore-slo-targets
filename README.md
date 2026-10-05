@@ -4,6 +4,8 @@
 [![Target Framework](https://img.shields.io/badge/.NET-8.0-512BD4.svg)](https://dotnet.microsoft.com/)
 [![Observability](https://img.shields.io/badge/Dynatrace-OneAgent%20IL%20Weaving-1496FF.svg)](https://www.dynatrace.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Schema-Architects-LLC/aspnetcore-slo-targets/blob/main/LICENSE)
+[![NuGet Version](https://img.shields.io/nuget/v/SchemaArchitects.AspNetCore.Slo.svg?style=flat&color=004880&logo=nuget)](https://www.nuget.org/packages/SchemaArchitects.AspNetCore.Slo)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/SchemaArchitects.AspNetCore.Slo.svg?style=flat&color=004880&logo=nuget)](https://www.nuget.org/packages/SchemaArchitects.AspNetCore.Slo)
 
 ASP.NET Core middleware library designed to standardize latency-based Service Level Objectives (SLOs) across microservices. Captures target thresholds with zero external metrics overhead using **Dynatrace OneAgent IL (Intermediate Language) Weaving**.
 
